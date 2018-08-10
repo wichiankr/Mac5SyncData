@@ -145,27 +145,17 @@ namespace Mac5SyncData
                             // Start to delete old invoice in db Access
                             var invGuid = System.Guid.NewGuid().ToString();
                             var invExistguid = utils.getInvoiceGuid(l.MIHvnos);
-                            //cmd.Parameters.AddWithValue("guid", invExistguid);
                             cmd.Parameters.Add("guid", OleDbType.Char).Value = invExistguid;
-                            //cmd.Parameters.AddWithValue("Existguid", invExistguid);
                             cmd.Parameters.Add("Existguid", OleDbType.Char).Value = invExistguid;
-                            //cmd.Parameters.AddWithValue("invcode", l.MIHvnos);
                             cmd.Parameters.Add("invcode", OleDbType.Char).Value = l.MIHvnos;
-                            //cmd.Parameters.AddWithValue("invdate", l.MIHdate);
                             cmd.Parameters.Add("invdate", OleDbType.Date).Value = l.MIHdate.ToString();
-                            //cmd.Parameters.AddWithValue("invspecdisc", 0);
-                            cmd.Parameters.Add("invspecdisc", OleDbType.Integer).Value = 0;                        
-                            //cmd.Parameters.AddWithValue("invcust", string.Empty);
+                            cmd.Parameters.Add("invprice", OleDbType.Double).Value = l.MIHcog;
+                            cmd.Parameters.Add("invspecdisc", OleDbType.Integer).Value = 0;                 
                             cmd.Parameters.Add("invcust", OleDbType.Char).Value = string.Empty;
-                            //cmd.Parameters.AddWithValue("invcusttype", string.Empty);
                             cmd.Parameters.Add("invcusttype", OleDbType.Char).Value = string.Empty;
-                            //cmd.Parameters.AddWithValue("invnote", l.MIHnotes);
                             cmd.Parameters.Add("invnote", OleDbType.Char).Value = l.MIHnotes;
-                            //cmd.Parameters.AddWithValue("invtype", l.MIHtype);
                             cmd.Parameters.Add("invtype", OleDbType.Char).Value = l.MIHtype;
-                            //cmd.Parameters.AddWithValue("branch", utils.getBranchGuid(l.MIHcus));
                             cmd.Parameters.Add("branch",OleDbType.Char).Value = utils.getBranchGuid(l.MIHcus);
-                            //cmd.Parameters.AddWithValue("custnote", string.Empty);
                             cmd.Parameters.Add("customer", OleDbType.Char).Value = string.Empty;
 
                             //ตรวจสอบว่ามี invoice เก่าอยู่ไหม ถ้ามี ให้อัพเดท ถ้าไม่มีให้เพิ่มใหม่
@@ -189,10 +179,8 @@ namespace Mac5SyncData
                                 cmd.CommandText = "INSERT INTO invoice([guid],invcode,invdate,invprice,invspecdisc,invcust,invcusttype,invnote,invtype,branch,custnote)" +
                                     "values(@guid,@invcode,@invdate,@invprice,@invspecdisc,@invcust,@invcusttype,@invnote,@invtype,@branch,@custnote)";
 
-                                cmd.CommandText = "INSERT INTO invoice([guid])" +
-                                  "values(@guid)";
                                 cmd.ExecuteNonQuery();
-                                Console.WriteLine("Test str passed");
+
                             }
                             cmd.Parameters.Clear();
 
@@ -265,9 +253,5 @@ namespace Mac5SyncData
             
         }
 
-        private void metroButton1_Click(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

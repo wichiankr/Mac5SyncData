@@ -15,4 +15,3 @@ C:\Users\wichian.kr\Documents\Programming Project\Mac5SyncData\Mac5SyncData\bin\
 C:\Users\wichian.kr\Documents\Programming Project\Mac5SyncData\Mac5SyncData\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\wichian.kr\Documents\Programming Project\Mac5SyncData\Mac5SyncData\bin\Debug\EntityFramework.xml
 C:\Users\wichian.kr\Documents\Programming Project\Mac5SyncData\Mac5SyncData\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\wichian.kr\Documents\Programming Project\Mac5SyncData\Mac5SyncData\obj\Debug\Mac5SyncData.csprojAssemblyReference.cache
