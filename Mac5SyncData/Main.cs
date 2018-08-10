@@ -145,11 +145,11 @@ namespace Mac5SyncData
                             // Start to delete old invoice in db Access
                             var invGuid = System.Guid.NewGuid().ToString();
                             var invExistguid = utils.getInvoiceGuid(l.MIHvnos);
-                            cmd.Parameters.Add("guid", OleDbType.Char).Value = invExistguid;
+                            cmd.Parameters.Add("guid", OleDbType.Char).Value = invGuid;
                             cmd.Parameters.Add("Existguid", OleDbType.Char).Value = invExistguid;
-                            cmd.Parameters.Add("invcode", OleDbType.Char).Value = l.MIHvnos;
-                            cmd.Parameters.Add("invdate", OleDbType.Date).Value = l.MIHdate.ToString();
-                            cmd.Parameters.Add("invprice", OleDbType.Decimal).Value = l.MIHcog;
+                            cmd.Parameters.Add("invcode", OleDbType.Char).Value = "HIN180810-0001";
+                            cmd.Parameters.Add("invdate", OleDbType.Date).Value = DateTime.Now.ToString("dd/MM/yy");
+                            cmd.Parameters.Add("invprice", OleDbType.Decimal).Value = 20000;
                             cmd.Parameters.Add("invspecdisc", OleDbType.Decimal).Value = 0;                 
                             cmd.Parameters.Add("invcust", OleDbType.Char).Value = string.Empty;
                             cmd.Parameters.Add("invcusttype", OleDbType.Char).Value = string.Empty;
@@ -178,7 +178,8 @@ namespace Mac5SyncData
                                 // Start to add invoice
                                 cmd.CommandText = "INSERT INTO invoice([guid],invcode,invdate,invprice,invspecdisc,invcust,invcusttype,invnote,invtype,branch,custnote)" +
                                     "values(@guid,@invcode,@invdate,@invprice,@invspecdisc,@invcust,@invcusttype,@invnote,@invtype,@branch,@custnote)";
-                                
+
+                                Console.WriteLine("Prepare input " + utils.getBranchGuid(l.MIHcus) + l.MIHcus);
                                 cmd.ExecuteNonQuery();
 
                             }

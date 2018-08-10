@@ -18,13 +18,14 @@ namespace Mac5SyncData
             {
                 try
                 {
+                    Console.WriteLine("Prepare load guid branch " + mac5Code);
                     connection.Open();
-                    OleDbCommand cmd = new OleDbCommand();
-                    cmd.Connection = connection;
-                    cmd.CommandText = "SELECT [guid] FROM branch WHERE branchcodemac5 =@branchcodemac5";
-                    cmd.Parameters.AddWithValue("branchcodemac5", mac5Code);
+                    OleDbCommand cmdBranch = new OleDbCommand();
+                    cmdBranch.Connection = connection;
+                    cmdBranch.CommandText = "SELECT [guid] FROM branch WHERE branchcodemac5 ='CT-HQ0002'";
+                    cmdBranch.Parameters.AddWithValue("branchcodemac5", mac5Code);
 
-                    var code = cmd.ExecuteReader();
+                    var code = cmdBranch.ExecuteReader();
 
                     if (code.Read())
                     {
@@ -42,7 +43,7 @@ namespace Mac5SyncData
                 catch(Exception ex)
                 {
                     mac5Code = string.Empty;
-                    Console.WriteLine(ex.Message.ToString());
+                    Console.WriteLine("Query Branch Error " + ex.Message.ToString());
                 }
                 finally
                 {
