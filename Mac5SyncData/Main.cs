@@ -149,8 +149,8 @@ namespace Mac5SyncData
                             cmd.Parameters.Add("Existguid", OleDbType.Char).Value = invExistguid;
                             cmd.Parameters.Add("invcode", OleDbType.Char).Value = l.MIHvnos;
                             cmd.Parameters.Add("invdate", OleDbType.Date).Value = l.MIHdate.ToString();
-                            cmd.Parameters.Add("invprice", OleDbType.Double).Value = l.MIHcog;
-                            cmd.Parameters.Add("invspecdisc", OleDbType.Integer).Value = 0;                 
+                            cmd.Parameters.Add("invprice", OleDbType.Decimal).Value = l.MIHcog;
+                            cmd.Parameters.Add("invspecdisc", OleDbType.Decimal).Value = 0;                 
                             cmd.Parameters.Add("invcust", OleDbType.Char).Value = string.Empty;
                             cmd.Parameters.Add("invcusttype", OleDbType.Char).Value = string.Empty;
                             cmd.Parameters.Add("invnote", OleDbType.Char).Value = l.MIHnotes;
@@ -178,7 +178,7 @@ namespace Mac5SyncData
                                 // Start to add invoice
                                 cmd.CommandText = "INSERT INTO invoice([guid],invcode,invdate,invprice,invspecdisc,invcust,invcusttype,invnote,invtype,branch,custnote)" +
                                     "values(@guid,@invcode,@invdate,@invprice,@invspecdisc,@invcust,@invcusttype,@invnote,@invtype,@branch,@custnote)";
-
+                                
                                 cmd.ExecuteNonQuery();
 
                             }
