@@ -45,6 +45,7 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.bgk_loaddata = new System.ComponentModel.BackgroundWorker();
             this.bgk_syncdata = new System.ComponentModel.BackgroundWorker();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.pnl_containner.SuspendLayout();
             this.tabc_main.SuspendLayout();
             this.tab_syncdata.SuspendLayout();
@@ -80,6 +81,7 @@
             // 
             // tab_syncdata
             // 
+            this.tab_syncdata.Controls.Add(this.metroButton1);
             this.tab_syncdata.Controls.Add(this.btn_loaddata);
             this.tab_syncdata.Controls.Add(this.btn_syncdata);
             this.tab_syncdata.Controls.Add(this.txt_progress);
@@ -278,6 +280,16 @@
             this.bgk_syncdata.WorkerSupportsCancellation = true;
             this.bgk_syncdata.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgk_syncdata_DoWork);
             // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(37, 98);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(75, 23);
+            this.metroButton1.TabIndex = 6;
+            this.metroButton1.Text = "metroButton1";
+            this.metroButton1.UseSelectable = true;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,6 +329,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private System.ComponentModel.BackgroundWorker bgk_loaddata;
         private System.ComponentModel.BackgroundWorker bgk_syncdata;
+        private MetroFramework.Controls.MetroButton metroButton1;
     }
 }
 

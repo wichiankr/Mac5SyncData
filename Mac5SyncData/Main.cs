@@ -18,8 +18,10 @@ namespace Mac5SyncData
         public Main()
         {
             InitializeComponent();
-
+            
             txt_dbpath.Text = globalVar.dbPath;
+
+            
 
             
         }
@@ -186,6 +188,7 @@ namespace Mac5SyncData
                                 // Start to add invoice
                                 cmd.CommandText = "INSERT INTO invoice([guid],invcode,invdate,invprice,invspecdisc,invcust,invcusttype,invnote,invtype,branch,custnote)" +
                                     "values(@guid,@invcode,@invdate,@invprice,@invspecdisc,@invcust,@invcusttype,@invnote,@invtype,@branch,@custnote)";
+
                                 cmd.CommandText = "INSERT INTO invoice([guid])" +
                                   "values(@guid)";
                                 cmd.ExecuteNonQuery();
@@ -260,6 +263,45 @@ namespace Mac5SyncData
             }
 
             
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            using (OleDbConnection con = new OleDbConnection(globalVar.iserviceConStr))
+            {
+                try
+                {
+                    con.Open();
+                    OleDbCommand cmd = new OleDbCommand();
+                    cmd.Connection = con;
+                    cmd.CommandText = "INSERT INTO invoice([guid],invcode,invdate,invprice,invspecdisc,invcust,invcusttype,invnote,invtype,branch,custnote)" +
+                                   "values(@guid,@invcode,@invdate,@invprice,@invspecdisc,@invcust,@invcusttype,@invnote,@invtype,@branch,@custnote)";
+                    // Start to delete old invoice in db Access
+                    var invGuid = System.Guid.NewGuid().ToString();
+                    cmd.Parameters.Add("guid", OleDbType.Char).Value = invGuid;
+                    cmd.Parameters.Add("invcode", OleDbType.Char).Value = "HIN180810-001";
+                    cmd.Parameters.Add("invdate", OleDbType.Date).Value = DateTime.Now.ToString("dd/MM/yy");
+                    cmd.Parameters.Add("invprice", OleDbType.Double).Value = 30000;
+                    cmd.Parameters.Add("invspecdisc", OleDbType.Integer).Value = 0;
+                    cmd.Parameters.Add("invcust", OleDbType.Char).Value = string.Empty;
+                    cmd.Parameters.Add("invcusttype", OleDbType.Char).Value = string.Empty;
+                    cmd.Parameters.Add("invnote", OleDbType.Char).Value = string.Empty;
+                    cmd.Parameters.Add("invtype", OleDbType.Char).Value = "IS";
+                    cmd.Parameters.Add("branch", OleDbType.Char).Value = utils.getBranchGuid("CT-HQ0001");
+                    cmd.Parameters.Add("customer", OleDbType.Char).Value = string.Empty;
+                    cmd.ExecuteNonQuery();
+
+                }
+                catch (OleDbException ex)
+                {
+                    Console.WriteLine("Excute ไม่สำเร็จ");
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
         }
     }
 }
