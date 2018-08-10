@@ -22,7 +22,7 @@ namespace Mac5SyncData
                     connection.Open();
                     OleDbCommand cmdBranch = new OleDbCommand();
                     cmdBranch.Connection = connection;
-                    cmdBranch.CommandText = "SELECT [guid] FROM branch WHERE branchcodemac5 ='CT-HQ0002'";
+                    cmdBranch.CommandText = "SELECT [guid] FROM branch WHERE branchcodemac5 =@branchcodemac5";
                     cmdBranch.Parameters.AddWithValue("branchcodemac5", mac5Code);
 
                     var code = cmdBranch.ExecuteReader();
